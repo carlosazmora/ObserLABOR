@@ -38,7 +38,7 @@ st.sidebar.title("📊 Observatorio Laboral")
 seccion = st.sidebar.radio("Navegación", [
     "🏠 Panel Ejecutivo",
     "🔎 Análisis por Programa",
-    "🌍 Datos Internacionales (Adzuna)",
+    "🌍 Datos Internacionales",
     "📈 Tendencias e Insights",
     "🚨 Alertas",
     "💰 Variaciones Salariales",
