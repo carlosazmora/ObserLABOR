@@ -7,4 +7,3 @@ lxml
 openpyxl
 python-dotenv
 jobspy
-scrape_jobs
