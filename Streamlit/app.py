@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px 
 from datetime import datetime
-from Streamlit.AnalisisInternacional.adzuna import cargar_datos_internacionales
+from AnalisisInternacional.adzuna import cargar_datos_internacionales
 
 # Forzar caché limpio si es necesario
 st.cache_data.clear()
