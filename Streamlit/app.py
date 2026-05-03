@@ -3,6 +3,9 @@ import pandas as pd
 import plotly.express as px 
 from datetime import datetime
 from AnalisisInternacional.adzuna import cargar_datos_adzuna
+from VariacionesSalariales.VariacionesSalariales import mostrar_variaciones_salariales
+from TendenciasInsights.Tendencias import mostrar_tendencias_e_insights
+
 
 # Forzar caché limpio si es necesario
 st.cache_data.clear()
@@ -91,16 +94,7 @@ elif seccion == "🔎 Análisis por Programa":
 # ==================== TENDENCIAS E INSIGHTS ====================
 elif seccion == "📈 Tendencias e Insights":
     st.title("📈 Tendencias e Insights Estratégicos")
-    
-    tab1, tab2, tab3 = st.tabs(["Brechas Oferta-Demanda", "Habilidades Emergentes", "Impacto IA"])
-    
-    with tab1:
-        st.success("**Brecha identificada:** Alta demanda de IA y baja oferta en varios programas")
-    with tab2:
-        st.subheader("Habilidades con mayor crecimiento")
-        st.dataframe(df_competencias.sort_values('Demanda_%', ascending=False))
-    with tab3:
-        st.warning("**Habilidades en riesgo por IA:** Análisis jurídico básico, tareas administrativas repetitivas, programación básica")
+    mostrar_tendencias_e_insights()
 
 # ==================== ALERTAS ====================
 elif seccion == "🚨 Alertas":
@@ -137,7 +131,7 @@ elif seccion == "🔧 Mantenimiento":
     st.write("- Dashboard: Automático cada vez que se actualicen los datos")
     st.write("- Auditoría: Mensual por responsable de Alumni")
 
-# ==================== NUEVA SECCIÓN ====================
+# ==================== DATOS INTERNACIONALES ====================
 elif seccion == "🌍 Datos Internacionales":
     st.title("🌍 Análisis Internacional - Adzuna")
     
