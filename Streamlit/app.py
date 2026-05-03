@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px 
 from datetime import datetime
-from adzuna import cargar_datos_adzuna
+from DatosInternacionales import cargar_datos_adzuna
 from VariacionesSalariales import mostrar_variaciones_salariales
 from Tendencias import mostrar_tendencias_e_insights
 
@@ -50,7 +50,7 @@ seccion = st.sidebar.radio("Navegación", [
     "🔧 Mantenimiento"
 ])
 
-st.sidebar.caption(f"Actualizado: {datetime.now().strftime('%d %b %Y')}")
+st.sidebar.caption(f"{datetime.now().strftime('%d %b %Y')}")
 
 # ==================== PANEL EJECUTIVO ====================
 if seccion == "🏠 Panel Ejecutivo":
@@ -172,4 +172,4 @@ elif seccion == "🌍 Datos Internacionales":
             hide_index=True
         )
 
-st.caption("MVP - Observatorio del Mercado Laboral Unisabana • Hecho con Streamlit")
+st.caption("Observatorio del Mercado Laboral - Alumni Sabana")

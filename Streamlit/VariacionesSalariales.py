@@ -1,6 +1,6 @@
 import streamlit as st
 import plotly.express as px
-from adzuna import get_analisis_completo
+from DatosInternacionales import get_analisis_completo
 
 def mostrar_variaciones_salariales():
     data = get_analisis_completo()
