@@ -152,7 +152,8 @@ elif seccion == "🌍 Datos Internacionales":
         # Filtros
         col1, col2 = st.columns(2)
         with col1:
-            pais_sel = st.selectbox("País", sorted(df_adzuna["pais_nombre"].unique()))
+            # Mostrar todos los países disponibles
+            pais_sel = st.multiselect("País", options=sorted(df_adzuna["pais_nombre"].unique()), default=sorted(df_adzuna["pais_nombre"].unique()))
         with col2:
             # Mostrar todas las profesiones disponibles
 
@@ -166,13 +167,13 @@ elif seccion == "🌍 Datos Internacionales":
         
         # Filtrar
         df_filtrado = df_adzuna[
-            (df_adzuna["pais_nombre"] == pais_sel) & 
+            (df_adzuna["pais_nombre"].isin(pais_sel)) & 
             (df_adzuna["perfil"].isin(perfil_sel))
         ]
         
         # Gráfico
         fig = px.bar(df_filtrado, x="perfil", y="vacantes", 
-                     title=f"Vacantes en {pais_sel}",
+                     title=f"Vacantes en {', '.join(pais_sel)}",
                      color="perfil")
         st.plotly_chart(fig, use_container_width=True)
         
