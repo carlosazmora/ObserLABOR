@@ -1,6 +1,6 @@
 import streamlit as st
 import plotly.express as px
-from Streamlit.adzuna import get_analisis_completo
+from adzuna import get_analisis_completo
 
 def mostrar_tendencias_e_insights():
     data = get_analisis_completo()
