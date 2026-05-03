@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px 
 from datetime import datetime
-from AnalisisInternacional.adzuna import cargar_datos_internacionales
+from AnalisisInternacional.adzuna import cargar_datos_adzuna
 
 # Forzar caché limpio si es necesario
 st.cache_data.clear()
@@ -139,38 +139,43 @@ elif seccion == "🔧 Mantenimiento":
 
 # ==================== NUEVA SECCIÓN ====================
 elif seccion == "🌍 Datos Internacionales":
-    st.title("🌍 Análisis Internacional + Colombia")
+    st.title("🌍 Análisis Internacional - Adzuna")
     
-    with st.spinner("Cargando datos internacionales y Colombia..."):
-        df_int = cargar_datos_internacionales(incluir_colombia=True)
+    with st.spinner("Cargando datos de Adzuna..."):
+        df_adzuna = cargar_datos_adzuna()
     
-    if df_int.empty:
-        st.error("No se pudieron obtener datos")
+    if df_adzuna.empty:
+        st.error("No se pudieron obtener datos de Adzuna")
     else:
-        st.success(f"✅ Total: **{len(df_int)}** registros")
+        st.success(f"✅ Datos cargados: **{len(df_adzuna):,} registros**")
         
-        # Filtros
         col1, col2 = st.columns(2)
         with col1:
-            pais_sel = st.selectbox("País", sorted(df_int["pais_nombre"].unique()), default = ["Colombia"])
+            pais_sel = st.selectbox("País", sorted(df_adzuna["pais_nombre"].unique()))
         with col2:
-            todas = sorted(df_int["perfil"].unique())
+            todas = sorted(df_adzuna["perfil"].unique())
             perfil_sel = st.multiselect(
                 "Profesiones", 
                 options=todas,
-                default=todas[:12],   # primeras 12 por defecto
+                default=todas,
             )
         
-        df_filtrado = df_int[
-            (df_int["pais_nombre"] == pais_sel) & 
-            (df_int["perfil"].isin(perfil_sel))
+        df_filtrado = df_adzuna[
+            (df_adzuna["pais_nombre"] == pais_sel) & 
+            (df_adzuna["perfil"].isin(perfil_sel))
         ].sort_values("vacantes", ascending=False)
         
         fig = px.bar(df_filtrado, x="perfil", y="vacantes", 
                      title=f"Vacantes en {pais_sel}",
-                     color="fuente" if "fuente" in df_filtrado.columns else None)
+                     color="perfil")
         st.plotly_chart(fig, use_container_width=True)
         
-        st.dataframe(df_filtrado, use_container_width=True)
+        # Tabla limpia: solo las columnas que quieres
+        columnas_mostrar = ["pais_nombre", "perfil", "vacantes"]
+        st.dataframe(
+            df_filtrado[columnas_mostrar], 
+            use_container_width=True,
+            hide_index=True
+        )
 
 st.caption("MVP - Observatorio del Mercado Laboral Unisabana • Hecho con Streamlit")
