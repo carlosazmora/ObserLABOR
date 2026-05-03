@@ -2,9 +2,9 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px 
 from datetime import datetime
-from AnalisisInternacional.adzuna import cargar_datos_adzuna
-from VariacionesSalariales.VariacionesSalariales import mostrar_variaciones_salariales
-from TendenciasInsights.Tendencias import mostrar_tendencias_e_insights
+from Streamlit.adzuna import cargar_datos_adzuna
+from Streamlit.VariacionesSalariales import mostrar_variaciones_salariales
+from Streamlit.Tendencias import mostrar_tendencias_e_insights
 
 
 # Forzar caché limpio si es necesario
