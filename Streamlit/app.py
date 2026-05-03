@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px 
 from datetime import datetime
-from adzuna import cargar_datos_adzuna   # ← nuevo import
+from Streamlit.AnalisisInternacional.adzuna import cargar_datos_internacionales
 
 # Forzar caché limpio si es necesario
 st.cache_data.clear()
@@ -139,44 +139,38 @@ elif seccion == "🔧 Mantenimiento":
 
 # ==================== NUEVA SECCIÓN ====================
 elif seccion == "🌍 Datos Internacionales":
-    st.title("🌍 Análisis Internacional - Adzuna")
+    st.title("🌍 Análisis Internacional + Colombia")
     
-    with st.spinner("Cargando datos de Adzuna..."):
-        df_adzuna = cargar_datos_adzuna()
+    with st.spinner("Cargando datos internacionales y Colombia..."):
+        df_int = cargar_datos_internacionales(incluir_colombia=True)
     
-    if df_adzuna.empty:
-        st.error("No se pudo obtener datos")
+    if df_int.empty:
+        st.error("No se pudieron obtener datos")
     else:
-        st.success(f"✅ Datos cargados: **{len(df_adzuna):,} registros** de **{len(df_adzuna['perfil'].unique())}** profesiones")
+        st.success(f"✅ Total: **{len(df_int)}** registros")
         
         # Filtros
         col1, col2 = st.columns(2)
         with col1:
-            # Mostrar todos los países disponibles
-            pais_sel = st.multiselect("País", options=sorted(df_adzuna["pais_nombre"].unique()), default=sorted(df_adzuna["pais_nombre"].unique()))
+            pais_sel = st.selectbox("País", sorted(df_int["pais_nombre"].unique()), default = ["Colombia"])
         with col2:
-            # Mostrar todas las profesiones disponibles
-
-            todas_profesiones = sorted(df_adzuna["perfil"].unique())
+            todas = sorted(df_int["perfil"].unique())
             perfil_sel = st.multiselect(
                 "Profesiones", 
-                options=todas_profesiones,
-                default=todas_profesiones,
-                help="Puedes seleccionar/deseleccionar las que desees"
+                options=todas,
+                default=todas[:12],   # primeras 12 por defecto
             )
         
-        # Filtrar
-        df_filtrado = df_adzuna[
-            (df_adzuna["pais_nombre"].isin(pais_sel)) & 
-            (df_adzuna["perfil"].isin(perfil_sel))
-        ]
+        df_filtrado = df_int[
+            (df_int["pais_nombre"] == pais_sel) & 
+            (df_int["perfil"].isin(perfil_sel))
+        ].sort_values("vacantes", ascending=False)
         
-        # Gráfico
         fig = px.bar(df_filtrado, x="perfil", y="vacantes", 
-                     title=f"Vacantes en {', '.join(pais_sel)}",
-                     color="perfil")
+                     title=f"Vacantes en {pais_sel}",
+                     color="fuente" if "fuente" in df_filtrado.columns else None)
         st.plotly_chart(fig, use_container_width=True)
         
-        st.dataframe(df_filtrado.sort_values("vacantes", ascending=False), use_container_width=True)
+        st.dataframe(df_filtrado, use_container_width=True)
 
 st.caption("MVP - Observatorio del Mercado Laboral Unisabana • Hecho con Streamlit")
