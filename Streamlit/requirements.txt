@@ -1,20 +1,8 @@
-# ─── Core ────────────────────────────────────────────────────────────────────
-streamlit==1.57.0
-pandas==3.0.2
-plotly==6.7.0
-
-# ─── Scraping ────────────────────────────────────────────────────────────────
-python-jobspy==1.1.82
-requests==2.33.1
-beautifulsoup4==4.14.0
-lxml==6.1.0
-
-# ─── Datos / Excel ───────────────────────────────────────────────────────────
-openpyxl==3.1.5
-pyarrow==24.0.0
-
-# ─── Utilidades ──────────────────────────────────────────────────────────────
-python-dotenv==1.2.2
-tqdm==4.67.3
-regex==2026.4.4
-python-dateutil==2.9.0.post0
+streamlit
+pandas
+plotly
+requests
+beautifulsoup4
+lxml
+openpyxl
+python-dotenv

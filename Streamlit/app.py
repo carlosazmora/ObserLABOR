@@ -3,6 +3,9 @@ import pandas as pd
 import plotly.express as px 
 from datetime import datetime
 
+# Forzar caché limpio si es necesario
+st.cache_data.clear()
+
 st.set_page_config(page_title="Observatorio Laboral Unisabana", layout="wide", page_icon="📊")
 
 # ==================== DATOS DE EJEMPLO ====================
