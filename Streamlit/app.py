@@ -155,9 +155,13 @@ elif seccion == "🌍 Datos Internacionales":
             pais_sel = st.selectbox("País", sorted(df_adzuna["pais_nombre"].unique()))
         with col2:
             # Mostrar todas las profesiones disponibles
+
+            todas_profesiones = sorted(df_adzuna["perfil"].unique())
             perfil_sel = st.multiselect(
                 "Profesiones", 
-                sorted(df_adzuna["perfil"].unique())
+                options=todas_profesiones,
+                default=todas_profesiones,
+                help="Puedes seleccionar/deseleccionar las que desees"
             )
         
         # Filtrar
