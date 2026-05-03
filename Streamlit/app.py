@@ -138,23 +138,27 @@ elif seccion == "🔧 Mantenimiento":
     st.write("- Auditoría: Mensual por responsable de Alumni")
 
 # ==================== NUEVA SECCIÓN ====================
-elif seccion == "🌍 Datos Internacionales (Adzuna)":
+elif seccion == "🌍 Datos Internacionales":
     st.title("🌍 Análisis Internacional - Adzuna")
     
     with st.spinner("Cargando datos de Adzuna..."):
         df_adzuna = cargar_datos_adzuna()
     
     if df_adzuna.empty:
-        st.error("No se pudieron obtener datos de Adzuna")
+        st.error("No se pudo obtener datos")
     else:
-        st.success(f"Datos cargados: {len(df_adzuna):,} registros")
+        st.success(f"✅ Datos cargados: **{len(df_adzuna):,} registros** de **{len(df_adzuna['perfil'].unique())}** profesiones")
         
         # Filtros
         col1, col2 = st.columns(2)
         with col1:
-            pais_sel = st.selectbox("País", df_adzuna["pais_nombre"].unique())
+            pais_sel = st.selectbox("País", sorted(df_adzuna["pais_nombre"].unique()))
         with col2:
-            perfil_sel = st.multiselect("Perfiles", df_adzuna["perfil"].unique(), default=["software engineer"])
+            # Mostrar todas las profesiones disponibles
+            perfil_sel = st.multiselect(
+                "Profesiones", 
+                sorted(df_adzuna["perfil"].unique())
+            )
         
         # Filtrar
         df_filtrado = df_adzuna[
@@ -168,12 +172,6 @@ elif seccion == "🌍 Datos Internacionales (Adzuna)":
                      color="perfil")
         st.plotly_chart(fig, use_container_width=True)
         
-        st.dataframe(df_filtrado, use_container_width=True)
-
-        # En la misma sección
-        st.subheader("Tendencia por País")
-        fig2 = px.line(df_adzuna.groupby(['pais_nombre', 'fecha']).sum().reset_index(), 
-                    x='fecha', y='vacantes', color='pais_nombre')
-        st.plotly_chart(fig2)
+        st.dataframe(df_filtrado.sort_values("vacantes", ascending=False), use_container_width=True)
 
 st.caption("MVP - Observatorio del Mercado Laboral Unisabana • Hecho con Streamlit")
