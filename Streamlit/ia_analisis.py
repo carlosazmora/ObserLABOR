@@ -13,7 +13,8 @@ def generar_insight_claude(panel_nombre: str, contexto_datos: str = ""):
     """
     client = get_claude_client()
 
-    with open("competencias_analiticas_tecnicas.txt", "r", encoding="utf-8") as f:
+    _RUTA_HABILIDADES = os.path.join(os.path.dirname(os.path.abspath(__file__)), "competencias_analiticas_tecnicas.txt")
+    with open(_RUTA_HABILIDADES, "r", encoding="utf-8") as f:
         habilidades = f.read()
 
     system_prompt = f"""

@@ -55,12 +55,59 @@ NOMBRES = {
 }
 
 PROFESIONES = [
+    # School of Economic and Administrative Sciences
+    "Business Administration",
+    "Service Management",
+    "Marketing and International Logistics",
+    "International Business",
+    "International Economics and Finance",
+    "International Economics and Finance (Virtual)",
+    "Gastronomy",
+
+    # School of Behavioral Sciences
+    "Organizational Behavior",
+    "Psychology",
+
+    # School of Communication
+    "Audiovisual and Multimedia Communication",
+    "Corporate Communication",
+    "Journalism and Social Communication",
+
+    # School of Education
+    "Early Childhood Education",
+    "Unisabana College",
+
+    # School of Health Sciences
+    "Nursing",
+    "Physiotherapy",
+
+    # School of Law and Political Sciences
+    "Law",
+    "Political Science",
+    "International Relations",
+
+    # School of Humanities
+    "Philosophy",
+
+    # School of Engineering
+    "Data Science",
+    "Civil Engineering",
+    "Bioproduction Engineering",
+    "Design and Innovation Engineering",
+    "Industrial Engineering",
+    "Computer Engineering",
+    "Mechanical Engineering",
+    "Chemical Engineering",
+
+    # School of Medicine
+    "Medicine"                                                                                                                                                                                                                                   # Base que ya tenías
     "data scientist", "software engineer", "data analyst",
     "machine learning engineer", "devops engineer",
     "cybersecurity analyst", "cloud engineer",
     "business analyst", "project manager", "product manager",
     "financial analyst", "marketing specialist", "ux designer",
-    "industrial engineer", "supply chain analyst", "nurse", "teacher", "consultant"
+    "industrial engineer", "supply chain analyst",
+    "nurse", "teacher", "consultant",
 ]
 
 
