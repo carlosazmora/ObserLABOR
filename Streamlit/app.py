@@ -99,12 +99,8 @@ seccion = st.sidebar.radio("Navegación", [
     "🌍 Datos Internacionales",
     "🎯 Habilidades",
     "📈 Tendencias e Insights",
-    "🚨 Alertas",
     "💰 Variaciones Salariales",
-    "📊 Proyecciones",
-    "🌍 Cobertura Geográfica",
-    "📚 Fuentes",
-    "🔧 Mantenimiento"
+    "📊 Proyecciones"
 ])
 
 st.sidebar.caption(f"{datetime.now().strftime('%d %b %Y')}")
@@ -204,13 +200,6 @@ elif seccion == "📈 Tendencias e Insights":
     st.title("📈 Tendencias e Insights Estratégicos")
     mostrar_tendencias_e_insights()
 
-# ==================== ALERTAS ====================
-elif seccion == "🚨 Alertas":
-    st.title("🚨 Alertas Estratégicas")
-    st.error("**Alto Riesgo:** Derecho (-4% crecimiento)")
-    st.warning("**Moderado:** Administración necesita más analítica y IA")
-    st.success("**Oportunidad:** Marketing Digital (+22% crecimiento)")
-
 # ==================== VARIACIONES ====================
 elif seccion == "💰 Variaciones Salariales":
     st.title("💰 Variaciones Salariales")
@@ -267,31 +256,12 @@ elif seccion == "📊 Proyecciones":
         st.subheader("Sectores con mayor crecimiento — Vacantes vs. Crecimiento %")
         st.caption("Cada punto es un sector. Tamaño = empleo total 2024.")
         grafico_scatter_crecimiento(df11, df12)
-    
-# ==================== COBERTURA ====================
-elif seccion == "🌍 Cobertura Geográfica":
-    st.title("🌍 Cobertura Geográfica")
-    st.info("**Local (Bogotá / Cundinamarca) | Nacional | Internacional**")
-
-# ==================== FUENTES ====================
-elif seccion == "📚 Fuentes":
-    st.title("📚 Fuentes de Información")
-    fuentes = ["Servicio Público de Empleo", "Ministerio del Trabajo", "Banco de la República",
-               "Ocupacol", "LinkedIn", "World Economic Forum", "McKinsey"]
-    for f in fuentes:
-        st.success(f"✅ {f}")
-
-# ==================== MANTENIMIENTO ====================
-elif seccion == "🔧 Mantenimiento":
-    st.title("🔧 Mantenimiento y Sostenibilidad")
-    st.write("- Datos: Mensual / Trimestral según fuente")
-    st.write("- Dashboard: Automático")
-    st.write("- Auditoría: Mensual")
 
 # ==================== HABILIDADES ====================
 elif seccion == "🎯 Habilidades":
     st.title("🎯 Habilidades y Conocimientos")
     mostrar_habilidades()
+
 # ==================== DATOS INTERNACIONALES ====================
 elif seccion == "🌍 Datos Internacionales":
     st.title("🌍 Análisis Internacional - Adzuna")
