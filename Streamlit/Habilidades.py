@@ -12,7 +12,7 @@ from bs4 import BeautifulSoup
 # CONFIGURACIÓN
 # ============================================================
 
-DB_PATH   = "observatorio_laboral.duckdb"
+DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "observatorio_laboral.duckdb")
 TABLA_SK  = "skills"
 TABLA_KN  = "knowledge"
 TABLA_OCC = "ocupaciones"
