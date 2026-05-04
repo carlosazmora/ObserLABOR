@@ -181,20 +181,10 @@ if seccion == "🏠 Panel de Actualización":
                     with st.expander("Ver log"):
                         st.text("\n".join(_log))
                     st.rerun()
-
-    from DatosInternacionales import DB_PATH ## borrable
-    st.info(f"Ruta del .duckdb: `{DB_PATH}`")  ## borrable
     st.divider()
-    #### Finalización Código de porueba ======================
+    
     #### Prueba de Habilidades ===================================================================================
-    # --- DuckDB: Habilidades O*NET ---
-    from Habilidades import (
-        pipeline_datos as habilidades_pipeline,
-        bd_tiene_datos, DB_PATH as HAB_DB_PATH,
-        TABLA_SK, TABLA_KN, TABLA_OCC
-        )
-    import duckdb as _ddb2
-
+    
     _hab_lista = bd_tiene_datos()
 
     with st.expander("🎯 Gestión de datos de Habilidades O*NET (DuckDB)", expanded=True):
@@ -290,10 +280,9 @@ elif seccion == "🔧 Mantenimiento":
     st.write("- Dashboard: Automático")
     st.write("- Auditoría: Mensual")
 
-# ===================== HABILIDADES===================================================================================(/)/%%&%$#$%&//(((/&
 # ==================== HABILIDADES ====================
 elif seccion == "🎯 Habilidades":
-    from Habilidades import mostrar_habilidades
+    st.title("🎯 Habilidades y Conocimientos")
     mostrar_habilidades()
 # ==================== DATOS INTERNACIONALES ====================
 elif seccion == "🌍 Datos Internacionales":

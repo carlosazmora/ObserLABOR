@@ -977,7 +977,7 @@ def mostrar_habilidades() -> None:
     Renderiza la sección completa de Habilidades en la app Streamlit.
     Llama a esta función desde App.py.
     """
-    st.title("🎯 Habilidades y Conocimientos")
+
     st.markdown("Análisis de habilidades y áreas de conocimiento más demandadas según la base de datos **O\\*NET** (EE.UU.).")
 
     # ── Panel de gestión de datos ─────────────────────────────
