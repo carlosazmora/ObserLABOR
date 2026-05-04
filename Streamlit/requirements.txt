@@ -8,3 +8,4 @@ openpyxl
 python-dotenv
 anthropic
 duckdb
+matplotlib
