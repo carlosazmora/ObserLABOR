@@ -7,7 +7,7 @@ def mostrar_tendencias_e_insights():
  
     # Avisar al usuario si no hay datos aún
     if "Sin datos" in contexto:
-        st.info("⚠️ Los datos de Adzuna aún no han sido cargados. Ve al **Panel Ejecutivo** y presiona 🔄 Actualizar datos para habilitarlo.")
+        st.info("⚠️ Sin datos cargados. Ve al **Panel de Actualización** y presiona '🔄 Actualizar DB' para habilitarlo.")
  
     if st.button("🤖 Generar Análisis con Claude", disabled=("Sin datos" in contexto)):
         generar_insight_claude(

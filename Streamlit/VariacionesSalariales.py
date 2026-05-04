@@ -6,7 +6,7 @@ def mostrar_variaciones_salariales():
     data = get_analisis_completo()
 
     if data is None:
-        st.info("⚠️ Sin datos cargados. Ve al **Panel Ejecutivo** y presiona 🔄 Actualizar datos.")
+        st.info("⚠️ Sin datos cargados. Ve al **Panel de Actualización** y presiona '🔄 Actualizar DB' para habilitarlo.")
         return
 
     st.subheader("Demanda por Perfil (proxy de oportunidad salarial)")
