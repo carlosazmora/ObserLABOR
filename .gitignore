@@ -2,3 +2,5 @@
 secrets.toml
 .env
 .env.*
+*.duckdb
+*.db
