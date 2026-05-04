@@ -43,10 +43,8 @@ def generar_insight_claude(panel_nombre: str, contexto_datos: str = ""):
 
         - **Resumen Principal** (2-4 líneas con los hallazgos más importantes)
         - **Situación Actual** (datos y cifras clave, usando tablas cuando sea útil y segmentando el tipo de vacante según el sector económico, nivel de experiencia, ubicación geográfica, etc.)
-        - **Competencias Más Demandadas** (especificando claramente las requeridas y las cubiertas)
         - **Tendencias y Contexto** (qué está pasando en Colombia y, si es relevante, a nivel internacional)
-        - **Perspectivas a Futuro** (proyecciones y riesgos principales)
-        - **Recomendaciones Prácticas** (acciones concretas, priorizadas y fáciles de aplicar)
+        - **Recomendaciones Prácticas** (acciones concretas, priorizadas y fáciles de aplicar según las necesidades de cada sector económico por separado)
 
         Utiliza **Markdown** y tablas cuando ayuden a comparar información o hacerla más clara.
 
@@ -54,6 +52,7 @@ def generar_insight_claude(panel_nombre: str, contexto_datos: str = ""):
         - Los títulos deben ser claros, directos y en lenguaje cotidiano.
         - El objetivo principal es que la persona que pregunta entienda rápidamente la realidad del mercado laboral, las competencias clave y sepa exactamente qué puede hacer.
         - Cuando debas hablar de competencias técnicas y/o analíticas, segmenta dentro de las indicadas en {habilidades}, indicando claramente cuáles son las más demandadas, cuáles están en déficit y cuáles cubren bien los perfiles actuales. Usa tablas o listas para organizar esta información.
+        - Procura hacer la comparación con la información más actualizada posible, idealmente con datos de los últimos 3 meses. Para obtener contexto sobre la actualidad de la información, fecha y situación actuales, consulta en internet la más reciente información disponible en las fuentes que te indiqué previamente.
     """
 
     user_prompt = f"""

@@ -9,7 +9,7 @@ def mostrar_tendencias_e_insights():
     if "Sin datos" in contexto:
         st.info("⚠️ Sin datos cargados. Ve al **Panel de Actualización** y presiona '🔄 Actualizar DB' para habilitarlo.")
  
-    if st.button("🤖 Generar Análisis con Claude", disabled=("Sin datos" in contexto)):
+    if st.button("Generar Análisis con Claude", disabled=("Sin datos" in contexto)):
         generar_insight_claude(
             panel_nombre="Tendencias e Insights Estratégicos",
             contexto_datos=contexto

@@ -68,28 +68,6 @@ def ejecutar_con_progreso(funcion_proceso, mensaje_inicial: str):
 
     st.rerun()
 
-# ==================== DATOS DE EJEMPLO ====================
-@st.cache_data
-def cargar_datos():
-    df_programas = pd.DataFrame({
-        'Programa': ['Ingeniería de Sistemas', 'Administración', 'Economía', 'Derecho', 'Marketing', 'Diseño Industrial'],
-        'Empleabilidad_%': [94, 87, 85, 76, 89, 82],
-        'Salario_inicial': [5200, 3900, 4300, 3100, 3700, 3600],
-        'Crecimiento_%': [18, 9, 12, -4, 22, 11],
-        'Sector': ['Tecnología', 'Finanzas', 'Finanzas', 'Legal', 'Marketing', 'Manufactura'],
-        'Region': ['Nacional', 'Nacional', 'Nacional', 'Nacional', 'Nacional', 'Nacional']
-    })
-
-    df_competencias = pd.DataFrame({
-        'Competencia': ['Python', 'Power BI / Tableau', 'Inglés Avanzado', 'IA Generativa', 'Liderazgo', 'Comunicación', 'Machine Learning'],
-        'Demanda_%': [96, 89, 91, 94, 82, 87, 78],
-        'Tipo': ['Técnica', 'Técnica', 'Transversal', 'Técnica', 'Transversal', 'Transversal', 'Técnica'],
-        'Tendencia': ['Fuerte Crecimiento', 'Crecimiento', 'Estable', 'Fuerte Crecimiento', 'Estable', 'Estable', 'Crecimiento']
-    })
-    return df_programas, df_competencias
-
-df_programas, df_competencias = cargar_datos()
-
 # ==================== SIDEBAR ====================
 st.sidebar.title("📊 Observatorio Laboral")
 
