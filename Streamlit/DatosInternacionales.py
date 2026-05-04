@@ -218,3 +218,10 @@ def adzuna_request(pais: str, endpoint: str, params: dict = None):
         return r.json() if r.status_code == 200 else None
     except Exception:
         return None
+
+
+
+
+
+============================================================
+# NUEVAS COSAS
