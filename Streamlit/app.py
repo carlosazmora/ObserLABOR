@@ -17,6 +17,12 @@ from Habilidades import ( mostrar_habilidades, pipeline_datos,
     bd_tiene_datos, DB_PATH as HAB_DB_PATH,
     TABLA_SK, TABLA_KN, TABLA_OCC
 )
+from Proyecciones import (
+    cargar_datos as cargar_proyecciones,grafico_mayor_proyeccion,    grafico_puestos_demandados,
+    grafico_tendencias_sector,    grafico_programas_riesgo,    grafico_salarios_sector,
+    grafico_salarios_educacion,    grafico_scatter_crecimiento,
+)
+
 import duckdb as _ddb2
 import duckdb as _ddb
 
@@ -95,6 +101,7 @@ seccion = st.sidebar.radio("Navegación", [
     "📈 Tendencias e Insights",
     "🚨 Alertas",
     "💰 Variaciones Salariales",
+    "📊 Proyecciones",
     "🌍 Cobertura Geográfica",
     "📚 Fuentes",
     "🔧 Mantenimiento"
@@ -209,6 +216,58 @@ elif seccion == "💰 Variaciones Salariales":
     st.title("💰 Variaciones Salariales")
     mostrar_variaciones_salariales()
 
+# ==================== PROYECCIONES ====================
+elif seccion == "📊 Proyecciones":
+    st.title("📊 Proyecciones Ocupacionales — BLS 2024–2034")
+
+    archivo = st.file_uploader(
+        "Sube el archivo de proyecciones (.xlsx)",
+        type=["xlsx"],
+        help="Usa el archivo occupation.xlsx del BLS Employment Projections Program.",
+    )
+
+    if archivo is None:
+        st.info("⬆️ Sube el archivo Excel para comenzar el análisis.")
+    else:
+        with st.spinner("Cargando datos..."):
+            df11, df12, df13, df14, df15, df16 = cargar_proyecciones(archivo)
+        st.success(f"✅ {len(df11)} sectores · {len(df12):,} ocupaciones cargadas")
+        st.divider()
+
+        st.subheader("¿Qué ocupaciones tienen mayor proyección?")
+        st.caption("Top 20 con mayor crecimiento porcentual proyectado al 2034.")
+        grafico_mayor_proyeccion(df13)
+        st.divider()
+
+        st.subheader("¿Qué puestos son los más demandados?")
+        st.caption("Top 20 con mayor número absoluto de empleos nuevos al 2034.")
+        grafico_puestos_demandados(df14)
+        st.divider()
+
+        st.subheader("¿Cómo está cambiando la empleabilidad? — Tendencias por sector")
+        st.caption("Variación porcentual del empleo 2024–2034 por grupo ocupacional.")
+        grafico_tendencias_sector(df11)
+        st.divider()
+
+        st.subheader("Programas en riesgo — Ocupaciones en declive")
+        st.caption("Izquierda: declive más rápido (%). Derecha: mayor pérdida absoluta de empleos.")
+        grafico_programas_riesgo(df15, df16)
+        st.divider()
+
+        st.subheader("Variaciones salariales por sector")
+        st.caption("Salario mediano anual 2024 (USD) por grupo ocupacional.")
+        grafico_salarios_sector(df11)
+        st.divider()
+
+        st.subheader("Variaciones salariales por nivel educativo requerido")
+        st.caption("Salario mediano por nivel mínimo de educación requerida.")
+        grafico_salarios_educacion(df12)
+        st.divider()
+
+        st.subheader("Sectores con mayor crecimiento — Vacantes vs. Crecimiento %")
+        st.caption("Cada punto es un sector. Tamaño = empleo total 2024.")
+        grafico_scatter_crecimiento(df11, df12)
+    
 # ==================== COBERTURA ====================
 elif seccion == "🌍 Cobertura Geográfica":
     st.title("🌍 Cobertura Geográfica")
