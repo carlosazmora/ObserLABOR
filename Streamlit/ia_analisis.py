@@ -38,7 +38,6 @@ Genera un análisis profundo y útil.
                     system=system_prompt,
                     messages=[{"role": "user", "content": user_prompt}]
                 )
-                status.update(label="✅ Análisis completado", state="complete")
             
             return response.content[0].text
 
