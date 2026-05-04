@@ -62,6 +62,59 @@ if seccion == "🏠 Panel Ejecutivo":
 
     st.divider()
 
+
+
+    ####=========================================================================================== código nuevo de prueba
+    # --- DuckDB: persistencia entre sesiones ---
+    from DatosInternacionales import (
+        bd_existe, tabla_existe,
+        funcion_creacion, funcion_actualizacion,
+        DB_PATH, TABLA
+    )
+    import duckdb as _ddb
+
+    existe_bd    = bd_existe()
+    existe_tabla = existe_bd and tabla_existe()
+
+    with st.expander("🦆 Gestión de base de datos persistente (DuckDB)", expanded=True):
+        col_estado, col_boton = st.columns([3, 1])
+
+        if existe_bd and existe_tabla:
+            con      = _ddb.connect(DB_PATH, read_only=True)
+            n_filas  = con.execute(f"SELECT COUNT(*) FROM {TABLA}").fetchone()[0]
+            fecha_db = con.execute(f"SELECT MAX(fecha_extraccion) FROM {TABLA}").fetchone()[0]
+            con.close()
+            with col_estado:
+                st.caption(f"✅ BD lista · **{n_filas:,} registros** · Última extracción: **{fecha_db}**")
+            with col_boton:
+                if st.button("🔄 Actualizar BD", use_container_width=True):
+                    log_lines = []
+                    with st.spinner("Actualizando DuckDB..."):
+                        funcion_actualizacion(log_fn=log_lines.append)
+                    st.success("✅ BD actualizada.")
+                    with st.expander("Ver log"):
+                        st.text("\n".join(log_lines))
+                    st.rerun()
+        else:
+            with col_estado:
+                msg = "❌ Base de datos no encontrada." if not existe_bd else "❌ Tabla no encontrada."
+                st.caption(f"{msg} Presiona **Crear BD** para inicializarla.")
+            with col_boton:
+                if st.button("🟢 Crear BD", use_container_width=True):
+                    log_lines = []
+                    with st.spinner("Creando base de datos..."):
+                        funcion_creacion(log_fn=log_lines.append)
+                    st.success("✅ BD creada.")
+                    with st.expander("Ver log"):
+                        st.text("\n".join(log_lines))
+                    st.rerun()
+
+    st.divider()
+
+
+    #### Finalización Código de porueba ======================
+
+
 # ==================== ANÁLISIS POR PROGRAMA ====================
 elif seccion == "🔎 Análisis por Programa":
     st.title("🔎 Análisis por Programa Académico")
@@ -146,3 +199,7 @@ elif seccion == "🌍 Datos Internacionales":
         st.dataframe(df_filtrado[columnas_mostrar], use_container_width=True, hide_index=True)
 
 st.caption("Observatorio del Mercado Laboral - Alumni Sabana")
+
+
+
+
