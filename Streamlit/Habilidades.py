@@ -268,23 +268,55 @@ def fig_knowledge_top(df_knowledge: pd.DataFrame) -> mfig.Figure:
 
 
 def fig_skills_dist(df_skills: pd.DataFrame) -> mfig.Figure:
-    vals    = df_skills["Data Value"].dropna()
-    fig, ax = _base_fig("Distribución de valores — Skills", figsize=(12, 5))
-    ax.hist(vals, bins=40, color=PALETTE["accent1"], edgecolor=PALETTE["bg"], linewidth=0.4)
-    ax.set_xlabel("Data Value", color=PALETTE["muted"], fontsize=10)
-    ax.set_ylabel("Frecuencia",  color=PALETTE["muted"], fontsize=10)
-    ax.tick_params(axis="both",  labelcolor=PALETTE["muted"])
+    fig, axes = plt.subplots(1, 2, figsize=(14, 5))
+    fig.patch.set_facecolor(PALETTE["bg"])
+    fig.suptitle("Distribución de Skills por Escala O*NET", 
+                 color=PALETTE["text"], fontsize=14, fontweight="bold")
+
+    escalas = {
+        "IM": ("Importancia (1–5)\n¿Qué tan importante es esta skill?", PALETTE["accent1"]),
+        "LV": ("Nivel requerido (0–7)\n¿Qué nivel se necesita?",         PALETTE["accent1"]),
+    }
+
+    for ax, (scale_id, (descripcion, color)) in zip(axes, escalas.items()):
+        vals = df_skills[df_skills["Scale ID"] == scale_id]["Data Value"].dropna()
+        ax.set_facecolor(PALETTE["panel"])
+        ax.hist(vals, bins=30, color=color, edgecolor=PALETTE["bg"], linewidth=0.4)
+        ax.set_title(f"Scale ID = {scale_id}", color=PALETTE["text"], fontsize=11, fontweight="bold")
+        ax.set_xlabel(descripcion, color=PALETTE["muted"], fontsize=9)
+        ax.set_ylabel("Frecuencia",  color=PALETTE["muted"], fontsize=9)
+        ax.tick_params(axis="both", labelcolor=PALETTE["muted"])
+        ax.grid(axis="y", color="#dddddd", linewidth=0.5, linestyle="--")
+        for spine in ax.spines.values():
+            spine.set_edgecolor("#cccccc")
+
     plt.tight_layout()
     return fig
 
 
 def fig_knowledge_dist(df_knowledge: pd.DataFrame) -> mfig.Figure:
-    vals    = df_knowledge["Data Value"].dropna()
-    fig, ax = _base_fig("Distribución de valores — Knowledge", figsize=(12, 5))
-    ax.hist(vals, bins=40, color=PALETTE["accent2"], edgecolor=PALETTE["bg"], linewidth=0.4)
-    ax.set_xlabel("Data Value", color=PALETTE["muted"], fontsize=10)
-    ax.set_ylabel("Frecuencia",  color=PALETTE["muted"], fontsize=10)
-    ax.tick_params(axis="both",  labelcolor=PALETTE["muted"])
+    fig, axes = plt.subplots(1, 2, figsize=(14, 5))
+    fig.patch.set_facecolor(PALETTE["bg"])
+    fig.suptitle("Distribución de Knowledge por Escala O*NET",
+                 color=PALETTE["text"], fontsize=14, fontweight="bold")
+
+    escalas = {
+        "IM": ("Importancia (1–5)\n¿Qué tan importante es esta área?", PALETTE["accent2"]),
+        "LV": ("Nivel requerido (0–7)\n¿Qué nivel se necesita?",        PALETTE["accent2"]),
+    }
+
+    for ax, (scale_id, (descripcion, color)) in zip(axes, escalas.items()):
+        vals = df_knowledge[df_knowledge["Scale ID"] == scale_id]["Data Value"].dropna()
+        ax.set_facecolor(PALETTE["panel"])
+        ax.hist(vals, bins=30, color=color, edgecolor=PALETTE["bg"], linewidth=0.4)
+        ax.set_title(f"Scale ID = {scale_id}", color=PALETTE["text"], fontsize=11, fontweight="bold")
+        ax.set_xlabel(descripcion, color=PALETTE["muted"], fontsize=9)
+        ax.set_ylabel("Frecuencia",  color=PALETTE["muted"], fontsize=9)
+        ax.tick_params(axis="both", labelcolor=PALETTE["muted"])
+        ax.grid(axis="y", color="#dddddd", linewidth=0.5, linestyle="--")
+        for spine in ax.spines.values():
+            spine.set_edgecolor("#cccccc")
+
     plt.tight_layout()
     return fig
 
@@ -433,13 +465,21 @@ def mostrar_habilidades() -> None:
         plt.close(fig)
 
     with tab5:
-        st.subheader("Grupos Ocupacionales (código SOC)")
-        fig = fig_ocupaciones(df_occ)
-        if fig:
-            st.pyplot(fig, use_container_width=True)
-            plt.close(fig)
-        else:
-            st.warning("No se encontró la columna 'O*NET-SOC Code' en los datos.")
+      st.subheader("Grupos Ocupacionales (código SOC)")
+      fig = fig_ocupaciones(df_occ)
+      if fig:
+          st.pyplot(fig, use_container_width=True)
+          plt.close(fig)
+      else:
+          st.warning("No se encontró la columna 'O*NET-SOC Code' en los datos.")
+
+      st.divider()
+      st.markdown("#### 📋 Referencia de Códigos SOC")
+      st.dataframe(
+          _tabla_soc_referencia(),
+          use_container_width=True,
+          hide_index=True,
+      )
 
     with tab6:
         st.subheader("Skills vs Knowledge — correlación de promedios")
