@@ -11,3 +11,4 @@ duckdb
 matplotlib
 re
 io
+zipfile
