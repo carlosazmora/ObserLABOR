@@ -54,7 +54,7 @@ st.sidebar.caption(f"{datetime.now().strftime('%d %b %Y')}")
 # ==================== PANEL EJECUTIVO ====================
 if seccion == "🏠 Panel Ejecutivo":
     st.title("🏠 Panel Ejecutivo")
-    st.markdown("**Monitoreo del Mercado Laboral - Universidad de La Sabana**")
+    st.markdown("**Observatorio del Mercado Laboral - Alumni Sabana**")
 
     # --- Orquestación de datos Adzuna ---
     with st.expander("🔄 Gestión de datos internacionales (Adzuna)", expanded=True):
