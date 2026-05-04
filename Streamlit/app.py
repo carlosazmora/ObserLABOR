@@ -9,7 +9,7 @@ from datetime import datetime
 from DatosInternacionales import mostrar_boton_actualizacion, get_analisis_completo
 from VariacionesSalariales import mostrar_variaciones_salariales
 from Tendencias import mostrar_tendencias_e_insights
-from Habilidades import mostrar_habilidades, pipeline_datos, bd_tiene_datos
+from Habilidades import mostrar_habilidades, pipeline_datos, bd_tiene_datos ###################################################
 
 st.set_page_config(page_title="Observatorio Laboral Unisabana", layout="wide", page_icon="📊")
 
@@ -42,7 +42,7 @@ seccion = st.sidebar.radio("Navegación", [
     "🏠 Panel Ejecutivo",
     "🔎 Análisis por Programa",
     "🌍 Datos Internacionales",
-    "🎯 Habilidades",        ##########
+    "🎯 Habilidades",        ##############################################################################################
     "📈 Tendencias e Insights",
     "🚨 Alertas",
     "💰 Variaciones Salariales",
@@ -114,7 +114,7 @@ if seccion == "🏠 Panel Ejecutivo":
     st.info(f"Ruta del .duckdb: `{DB_PATH}`")  ## borrable
     st.divider()
     #### Finalización Código de porueba ======================
-    #### Prueba de Habilidades ======================================================
+    #### Prueba de Habilidades ===================================================================================
     # --- DuckDB: Habilidades O*NET ---
     from Habilidades import (
         pipeline_datos as habilidades_pipeline,
@@ -170,7 +170,7 @@ if seccion == "🏠 Panel Ejecutivo":
                     with st.expander("Ver log"):
                         st.text("\n".join(_log))
                     st.rerun()
-#### finalización prueba Habilidades
+#### finalización prueba Habilidades============================================================================
 
 # ==================== ANÁLISIS POR PROGRAMA ====================
 elif seccion == "🔎 Análisis por Programa":
@@ -224,7 +224,7 @@ elif seccion == "🔧 Mantenimiento":
     st.write("- Dashboard: Automático cada vez que se actualicen los datos")
     st.write("- Auditoría: Mensual por responsable de Alumni")
 
-# ===================== HABILIDADES==================================================================================
+# ===================== HABILIDADES===================================================================================(/)/%%&%$#$%&//(((/&
 # ==================== HABILIDADES ====================
 elif seccion == "🎯 Habilidades":
     from Habilidades import mostrar_habilidades
