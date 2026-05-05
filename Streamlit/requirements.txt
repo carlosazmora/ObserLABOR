@@ -9,6 +9,4 @@ python-dotenv
 anthropic
 duckdb
 matplotlib
-jobspy
-collections
-datetime
+jobspy==0.29.0
