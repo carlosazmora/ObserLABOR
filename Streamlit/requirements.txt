@@ -9,3 +9,6 @@ python-dotenv
 anthropic
 duckdb
 matplotlib
+jobspy
+collections
+datetime
